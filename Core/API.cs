@@ -13,6 +13,22 @@ namespace TailscaleClient.Core;
 
 internal static class API
 {
+    public static EventHandler<bool> OnConnectedChanged;
+
+    private static bool connected = false;
+    public static bool Connected
+    { 
+        get => connected;
+        private set
+        {
+            if (connected != value)
+            {
+                connected = value;
+                OnConnectedChanged?.Invoke(null, connected);
+            }
+        }
+    }
+
     private static HttpClient _client = null;
 
     private static readonly string TailscaleSocket = @"ProtectedPrefix\Administrators\Tailscale\tailscaled";
@@ -54,6 +70,16 @@ internal static class API
         };
 
         InitializeBusWatcher();
+
+        var accounts = GetAllProfiles();
+        Connected = GetPrefs().WantRunning;
+
+        var currentAccount = accounts.Find(a => a.ID == GetCurrentUser().ID);
+        if (currentAccount == null)
+        {
+            Connected = false;
+        }
+
         return true;
     }
 
@@ -243,9 +269,11 @@ internal static class API
         currentPrefs.WantRunning = true;
         currentPrefs.WantRunningSet = true;
         UpdatePrefs(currentPrefs);
+        Connected = true;
     }
     public static void Disconnect()
     {
         UpdatePrefs(new Types.Prefs { WantRunning = false, WantRunningSet = true });
+        Connected = false;
     }
 }

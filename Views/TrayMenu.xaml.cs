@@ -21,17 +21,28 @@ public sealed partial class TrayMenu : UserControl
     {
         InitializeComponent();
         TrayMenu_ActualThemeChanged(this, null);
+        Core.API.OnConnectedChanged += API_OnConnectedChanged;
+    }
+
+    private void API_OnConnectedChanged(object sender, bool connected)
+    {
+        App.MainWindow.DispatcherQueue.TryEnqueue(() => SetTrayMenuIcon(ActualTheme == ElementTheme.Light, connected));
     }
 
     private void TrayMenu_ActualThemeChanged(FrameworkElement sender, object args)
     {
-        if (sender.ActualTheme == ElementTheme.Light)
+        SetTrayMenuIcon(ActualTheme == ElementTheme.Light, Core.API.Connected);
+    }
+
+    private void SetTrayMenuIcon(bool lightTheme, bool connected)
+    {
+        if (lightTheme)
         {
-            ImageSource = new BitmapImage(Constants.TrayIconConnectedLightUri);
+            ImageSource = new BitmapImage(connected ? Constants.TrayIconConnectedLightUri : Constants.TrayIconDisconnectedLightUri);
         }
         else
         {
-            ImageSource = new BitmapImage(Constants.TrayIconConnectedDarkUri);
+            ImageSource = new BitmapImage(connected ? Constants.TrayIconConnectedDarkUri : Constants.TrayIconDisconnectedDarkUri);
         }
     }
 
@@ -54,6 +65,7 @@ public sealed partial class TrayMenu : UserControl
     {
         try
         {
+            Core.API.OnConnectedChanged -= API_OnConnectedChanged;
             TrayIcon.Dispose();
         }
         catch { }
