@@ -6,12 +6,13 @@
     xmlns:local="using:TailscaleClient.Views"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:tb="using:H.NotifyIcon"
+    ActualThemeChanged="TrayMenu_ActualThemeChanged"
     mc:Ignorable="d">
     <tb:TaskbarIcon
         x:Name="TrayIcon"
         ContextMenuMode="SecondWindow"
         DoubleClickCommand="{x:Bind ShowWindowCommand, Mode=OneTime}"
-        IconSource="ms-appx:///Assets/Icons/AppIconBase-Light.ico"
+        IconSource="{x:Bind ImageSource, Mode=OneWay}"
         MenuActivation="RightClick"
         NoLeftClickDelay="True"
         ToolTipService.ToolTip="{x:Bind AppDisplayName, Mode=OneTime}"

@@ -5,8 +5,8 @@
     <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <RootNamespace>TailscaleClient</RootNamespace>
     <ApplicationManifest>app.manifest</ApplicationManifest>
-	<Platforms>x64;ARM64</Platforms>
-	<PlatformTarget>anycpu</PlatformTarget>
+	  <Platforms>x64;ARM64</Platforms>
+	  <PlatformTarget>anycpu</PlatformTarget>
     <RuntimeIdentifiers>win-x64;win-arm64</RuntimeIdentifiers>
     <UseRidGraph>true</UseRidGraph>
     <UseWinUI>true</UseWinUI>
@@ -51,9 +51,7 @@
     <Content Remove="Assets\Apple.png" />
     <Content Remove="Assets\ConfirmDialog.xaml" />
     <Content Remove="Assets\ConfirmDialog.xaml.cs" />
-    <Content Remove="Assets\DeviceCard - Copy.xaml.cs" />
     <Content Remove="Assets\DeviceCard.xaml" />
-    <Content Remove="Assets\FeatureTag - Copy.xaml.cs" />
     <Content Remove="Assets\FeatureTag.xaml" />
     <Content Remove="Assets\Icons\AppIcon.altform-lightunplated_targetsize-16.png" />
     <Content Remove="Assets\Icons\AppIcon.altform-lightunplated_targetsize-24.png" />
@@ -74,9 +72,6 @@
     <Content Remove="Assets\LoginDialog - Copy.xaml.cs" />
     <Content Remove="Assets\LoginDialog.xaml" />
     <Content Remove="Assets\LoginDialog.xaml.cs" />
-    <Content Remove="Assets\TailscaleIcon - Copy.xaml.cs" />
-    <Content Remove="Assets\TailscaleIcon.xaml" />
-    <Content Remove="Assets\TailscaleIcon.xaml.cs" />
     <Content Remove="Assets\Unknown.png" />
     <Content Remove="Assets\Windows.png" />
   </ItemGroup>
@@ -95,7 +90,6 @@
     <None Remove="Assets\Icons\AppIcon.targetsize-32_altform-unplated.png" />
     <None Remove="Assets\Icons\AppIcon.targetsize-48_altform-lightunplated.png" />
     <None Remove="Assets\LoginDialog.xaml" />
-    <None Remove="Assets\TailscaleIcon.xaml" />
     <None Remove="MainWindow.xaml" />
     <None Remove="Views\Accounts.xaml" />
     <None Remove="Views\AppSkeleton.xaml" />
@@ -136,19 +130,7 @@
     <Content Update="Assets\Misc\Guest.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Assets\Platforms\Android.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Assets\Platforms\Apple.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Assets\Platforms\Linux.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Assets\Platforms\Unknown.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Update="Assets\Platforms\Windows.png">
+    <Content Update="Assets\Platforms\*.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Assets\Icons\Tailscale-AppIcon.png">
@@ -159,63 +141,45 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Page Update="Views\Error.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-    </Page>
-    <Page Update="Views\Settings.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Update="Views\Accounts.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
     <Page Update="Assets\AccountCard.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Assets\FeatureTag.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Assets\DeviceCard.xaml">
-      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Update="Views\AppSkeleton.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\Home.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Assets\TailscaleIcon.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\Misc\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Views\TrayMenu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <Page Update="Assets\LoginDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Update="Assets\ConfirmDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Update="Assets\DeviceCard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Assets\FeatureTag.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Assets\LoginDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Accounts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\AppSkeleton.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Error.xaml">
+      <XamlRuntime>$(DefaultXamlRuntime)</XamlRuntime>
+    </Page>
+    <Page Update="Views\Home.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\Settings.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="Views\TrayMenu.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Update="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Assets\Misc\" />
   </ItemGroup>
 
   <!--

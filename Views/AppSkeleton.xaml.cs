@@ -3,7 +3,9 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.UI.Xaml.Media;
 using Microsoft.UI.Xaml.Media.Animation;
+using Microsoft.UI.Xaml.Media.Imaging;
 
 namespace TailscaleClient.Views;
 
@@ -26,9 +28,22 @@ public sealed partial class AppSkeleton : Page, INotifyPropertyChanged
         }
     }
 
+    private ImageSource _imageSource = null;
+    public ImageSource ImageSource
+    {
+        get => _imageSource;
+        set
+        {
+            _imageSource = value;
+            OnPropertyChanged();
+        }
+    }
+
     public AppSkeleton()
     {
         InitializeComponent();
+
+        Page_ActualThemeChanged(this, null);
 
         var status = Core.API.GetStatus();
         if (status.BackendState == "NeedsLogin")
@@ -55,6 +70,18 @@ public sealed partial class AppSkeleton : Page, INotifyPropertyChanged
     private void Page_Loaded(object sender, RoutedEventArgs e)
     {
         App.MainWindow.SetTitleBar(AppTitleBar);
+    }
+
+    private void Page_ActualThemeChanged(FrameworkElement sender, object args)
+    {
+        if (sender.ActualTheme == ElementTheme.Light)
+        {
+            ImageSource = new BitmapImage(Constants.AppIconLightAppxUri);
+        }
+        else
+        {
+            ImageSource = new BitmapImage(Constants.AppIconDarkAppxUri);
+        }
     }
 
     private void OnNavigate(NavigationView sender, NavigationViewSelectionChangedEventArgs args)

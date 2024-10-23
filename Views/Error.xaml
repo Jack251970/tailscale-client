@@ -7,6 +7,7 @@
     xmlns:custom="using:TailscaleClient.Assets"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    ActualThemeChanged="Page_ActualThemeChanged"
     Loaded="Page_Loaded"
     mc:Ignorable="d">
     <Grid>
@@ -23,7 +24,7 @@
         Canvas.ZIndex="1"
         IsHitTestVisible="True">
             <StackPanel VerticalAlignment="Center" Orientation="Horizontal">
-                <custom:TailscaleIcon/>
+                <Image Height="20" Width="20" Source="{x:Bind ImageSource, Mode=OneWay}"/>
                 <TextBlock
                 x:Name="AppTitle"
                 Margin="12,0,0,0"
